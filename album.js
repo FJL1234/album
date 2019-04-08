@@ -79,7 +79,7 @@ function renderAlbumList() {   //相册列表渲染函数
       currentPage = 1;  //页数为第一页
       currentAlbum = albName; //切换相册名
       renderPhotoList();  //调用图片显示区域渲染函数
-      // pagination();   //调用分页函数
+      pagination();   //调用分页函数
       albumTitle.innerText = currentAlbum;   //显示当前的相册名
     });
 
@@ -126,7 +126,7 @@ function renderAlbumList() {   //相册列表渲染函数
       button.addEventListener("click",function (event) {  //监听删除按钮的点击事件
           let index = albumPhotoList[currentAlbum].indexOf(img);  //查找图片的位置
           albumPhotoList[currentAlbum].splice(index,1);  //在相册的数组中删除图片
-          // pagination();  //调用分页函数
+          pagination();  //调用分页函数
           renderPhotoList();  //调用图片区域渲染函数
         });
 
@@ -140,14 +140,18 @@ function renderAlbumList() {   //相册列表渲染函数
 
 function uploadPhoto(photo) {  //上传图片函数
   photoAdd(currentAlbum,photo); //调用图片添加函数
-  // pagination(); //调用分页函数
+  pagination(); //调用分页函数
   renderPhotoList();  //调用图片区域渲染函数
 }
 
 function pagination() {   //分页函数
   pageNav.innerHTML = "";  //清空分页区域
+  console.log("1111");
   let pageNavFirstLink = document.createElement("a"); //新建第一页的a元素
   let pageNavLastLink = document.createElement("a");  //新建最后一页的a元素
+  pageNavFirstLink.href = "#";
+  pageNavLastLink.href = "#";
+
   let pageNavFirst = document.createElement("li");  //新建第一页的li元素
   let pageNavLast = document.createElement("li");  //新建最后一页的li元素
 
@@ -157,11 +161,38 @@ function pagination() {   //分页函数
   let length = albumPhotoList[currentAlbum].length;  //获取当前相册的图片数量
 
   pageNavFirstLink.addEventListener("click",function (event) {  //监听第一页的a元素的点击事件
+    pageNavLiList = document.querySelectorAll("nav>ul>li");
+    pageNavLinkList = document.querySelectorAll("nav>ul>li>a");
+    pageNavLiList.forEach(li=>{
+      li.style.backgroundColor = "";
+    });
+    pageNavLinkList.forEach(a=>{
+      a.style.color = "#2C70DD";
+    });
+    let firstlidom = document.querySelector("nav>ul>li:nth-child(2)");
+    let firstadom = document.querySelector("nav>ul>li:nth-child(2)>a");
+    firstlidom.style.backgroundColor = "#C2C2C2";
+    firstadom.style.color = "white";
+
     currentPage = 1;   //当前的页数切换为第一页
     renderPhotoList();   //调用图片区域渲染函数
   });
 
   pageNavLastLink.addEventListener("click",function (event) {  //监听最后一页的a元素的点击事件
+    pageNavLiList = document.querySelectorAll("nav>ul>li");
+    pageNavLinkList = document.querySelectorAll("nav>ul>li>a");
+    pageNavLiList.forEach(li=>{
+      li.style.backgroundColor = "";
+    });
+    pageNavLinkList.forEach(a=>{
+      a.style.color = "#2C70DD";
+    });
+
+    let lastlidom = document.querySelector("nav>ul>li:nth-last-child(2)");
+    let lastadom = document.querySelector("nav>ul>li:nth-last-child(2)>a");
+    lastlidom.style.backgroundColor = "#C2C2C2";
+    lastadom.style.color = "white";
+
     currentPage = length/photoPerPage > 0 ? Math.ceil(length/photoPerPage) : 1;  //判断当前的页数
     renderPhotoList();  //调用图片区域渲染函数
   });
@@ -171,10 +202,21 @@ function pagination() {   //分页函数
   pageNav.appendChild(pageNavFirst);  //将第一页的li元素加入分页区域
 
   for(let i=0; i<length/photoPerPage; i++){  //for循环，i<图片的总数/每页显示的数量(3)
-    let pageNavLink = document.querySelector("a");  //新建一个a元素
-    let pageNavLi = document.querySelector("li");  //新建一个li元素
+    let pageNavLink = document.createElement("a");  //新建一个a元素
+    pageNavLink.href = "#";
+    let pageNavLi = document.createElement("li");  //新建一个li元素
     pageNavLink.innerText = `${i+1}`;   //设置a元素显示的页数
     pageNavLink.onclick = function () {  //监听a元素的点击事件
+      pageNavLiList = document.querySelectorAll("nav>ul>li");
+      pageNavLinkList = document.querySelectorAll("nav>ul>li>a");
+      pageNavLiList.forEach(li=>{
+        li.style.backgroundColor = "";
+      });
+      pageNavLinkList.forEach(a=>{
+        a.style.color = "#2C70DD";
+      });
+      pageNavLi.style.backgroundColor = "#C2C2C2";
+      pageNavLink.style.color = "white";
       currentPage = i+1;  //切换当前的页数
       renderPhotoList();  //调用图片显示区域渲染函数
     }
