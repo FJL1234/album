@@ -146,7 +146,6 @@ function uploadPhoto(photo) {  //上传图片函数
 
 function pagination() {   //分页函数
   pageNav.innerHTML = "";  //清空分页区域
-  console.log("1111");
   let pageNavFirstLink = document.createElement("a"); //新建第一页的a元素
   let pageNavLastLink = document.createElement("a");  //新建最后一页的a元素
   pageNavFirstLink.href = "#";

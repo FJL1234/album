@@ -84,11 +84,11 @@ ul{
 .photo-list .photo{
   float: left;
   position: relative;
-  margin: 10px;
+  margin: 10px 47px;
 }
 
 .photo-list .photo img{
-  width:150px;
+  width:300px;
 }
 
 .photo-list .photo button{
