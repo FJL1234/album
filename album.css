@@ -40,6 +40,7 @@ ul{
   height: 400px;
   border: 1px solid red;
   float: left;
+  overflow: auto;
 }
 
 .right{
